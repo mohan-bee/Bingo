@@ -1,7 +1,5 @@
 ### Bingo Game Project Overview
 
-**Project Title**: Bingo Game Application
-
 ---
 
 **Objective**:  
