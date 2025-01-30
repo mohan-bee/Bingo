@@ -10,6 +10,8 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [roomId, setRoomId] = useState('')
   const [users, setUsers] = useState([])
+  const [isGameOver, setIsGameOver] = useState(false)
+  
   useEffect(() => {
     socket.on('message', (data) => {
       setData(prev => [prev,data])
@@ -17,6 +19,9 @@ const App = () => {
     })
     socket.on('users', (users) => {
       setUsers(users)
+    })
+    socket.on('isGameOver', (data) =>{
+      setIsGameOver(data)
     })
     return () => {
       socket.off('message')
@@ -28,7 +33,7 @@ const App = () => {
     <BrowserRouter>
     <Routes>
         <Route index element={<Entry socket={socket} username={username} roomId={roomId} setUsername={setUsername} setRoomId={setRoomId} />} />
-        <Route path='/rooms/:id' element={<Room data={data} users={users}/>} />
+        <Route path='/rooms/:id' element={<Room isGameOver={isGameOver} socket={socket} data={data} users={users}/>} />
     </Routes>
         
     </BrowserRouter>

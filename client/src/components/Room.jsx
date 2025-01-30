@@ -1,7 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import Board from './Board'
 
-const Room = ({ data, users }) => {
+const Room = ({ data, users, socket, isGameOver }) => {
   const { id } = useParams()
   
   return (
@@ -19,6 +20,7 @@ const Room = ({ data, users }) => {
           <p key={index}>{user}</p>
         ))}
       </div>
+      {!isGameOver ? <Board socket={socket} />: "Game Over"}
     </div>
   )
 }
